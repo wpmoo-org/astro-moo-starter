@@ -1,0 +1,13 @@
+---
+import Button from "@wpmoo/astro/components/Button.astro";
+import type { ComponentProps } from "astro/types";
+interface Props {
+  label: string;
+  href: string;
+  variant?: ComponentProps<typeof Button>["variant"];
+  size?: ComponentProps<typeof Button>["size"];
+}
+const { label, href, variant, size } = Astro.props;
+---
+
+<Button element="a" label={label} href={href} variant={variant} size={size} />

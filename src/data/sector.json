@@ -1,0 +1,28 @@
+[
+  {
+    "id": "foundation",
+    "name": "Foundation",
+    "slug": "foundation",
+    "description": "Company information and foundational project updates.",
+    "locales": {
+      "de": {
+        "name": "Grundlagen",
+        "slug": "grundlagen",
+        "description": "Informationen zum Studio und den Grundlagen des Projekts."
+      }
+    }
+  },
+  {
+    "id": "development",
+    "name": "Development",
+    "slug": "development",
+    "description": "Implementation examples and development services.",
+    "locales": {
+      "de": {
+        "name": "Entwicklung",
+        "slug": "entwicklung",
+        "description": "Umsetzungsbeispiele und Entwicklungsleistungen."
+      }
+    }
+  }
+]

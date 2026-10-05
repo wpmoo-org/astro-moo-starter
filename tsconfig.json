@@ -1,0 +1,6 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": { "module": "ESNext", "moduleResolution": "Bundler" },
+  "include": [".astro/types.d.ts", "src/**/*", "routes/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

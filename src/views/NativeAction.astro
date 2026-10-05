@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Page from "@wpmoo/astro/views/Single.astro";
+import Action from "../components/Action.astro";
+import { resolvePageOptions } from "@wpmoo/astro/config";
+import { getSiteContext } from "@wpmoo/astro/context";
+import { getLocaleHref } from "@wpmoo/astro/i18n";
+import { resolveSeoMetadata } from "@wpmoo/astro/seo";
+import { getChrome } from "../navigation.js";
+import { getMessages } from "../messages.js";
+interface Props {
+  locale: string;
+}
+const { locale } = Astro.props;
+const { site, i18n } = getSiteContext();
+const title = getMessages(locale).native;
+const options = resolvePageOptions(site, "page", "single", undefined, locale);
+const href = getLocaleHref("/native-action", locale);
+const languageLinks = i18n!.locales.map((lang) => ({
+  locale: lang,
+  href: getLocaleHref("/native-action", lang),
+}));
+const chrome = await getChrome(href, locale, title, languageLinks);
+const metadata = resolveSeoMetadata(site, {
+  title,
+  status: "publish",
+  view: "native",
+  lang: locale,
+  url: new URL(href, Astro.site).href,
+  alternates: languageLinks.map((link) => ({
+    locale: link.locale,
+    url: new URL(link.href, Astro.site).href,
+  })),
+});
+---
+
+<Layout
+  title={title}
+  options={options}
+  chrome={chrome}
+  metadata={metadata}
+  pageContext={{ view: "native", key: "native-action" }}
+  ><Page title={title} parts={options.parts}
+    ><Action
+      label={getMessages(locale).action}
+      href={getLocaleHref("/", locale)}
+    /></Page
+  ></Layout
+>

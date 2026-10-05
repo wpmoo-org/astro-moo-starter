@@ -1,0 +1,30 @@
+{
+  "name": "astro-moo-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An Astro project using the Moo UI foundation.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wpmoo-org/astro-moo-starter.git"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@wpmoo/astro": "0.1.0",
+    "astro": "7.3.3",
+    "@astrojs/mdx": "8.0.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "guides",
+    "name": "Guides",
+    "slug": "guides",
+    "description": "Practical guides and reusable content examples.",
+    "locales": {
+      "de": {
+        "name": "Anleitungen",
+        "slug": "anleitungen",
+        "description": "Praktische Anleitungen und wiederverwendbare Inhaltsbeispiele."
+      }
+    }
+  },
+  {
+    "id": "company",
+    "name": "Company",
+    "slug": "company",
+    "description": "Information about the studio and its services.",
+    "locales": {
+      "de": {
+        "name": "Unternehmen",
+        "slug": "unternehmen",
+        "description": "Informationen über das Studio und seine Leistungen."
+      }
+    }
+  },
+  {
+    "id": "news",
+    "name": "News",
+    "slug": "news",
+    "description": "Announcements and project updates.",
+    "locales": {
+      "de": {
+        "name": "Neuigkeiten",
+        "slug": "neuigkeiten",
+        "description": "Ankündigungen und Neuigkeiten zum Projekt."
+      }
+    }
+  }
+]

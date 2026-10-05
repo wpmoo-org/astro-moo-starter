@@ -1,0 +1,41 @@
+[
+  {
+    "id": "astro",
+    "name": "Astro",
+    "slug": "astro",
+    "description": "Content about building with Astro.",
+    "locales": {
+      "de": {
+        "name": "Astro",
+        "slug": "astro",
+        "description": "Inhalte zur Entwicklung mit Astro."
+      }
+    }
+  },
+  {
+    "id": "mdx",
+    "name": "MDX",
+    "slug": "mdx",
+    "description": "Examples combining prose and reusable components.",
+    "locales": {
+      "de": {
+        "name": "MDX",
+        "slug": "mdx",
+        "description": "Beispiele mit Text und wiederverwendbaren Komponenten."
+      }
+    }
+  },
+  {
+    "id": "release",
+    "name": "Release",
+    "slug": "release",
+    "description": "Release announcements and progress updates.",
+    "locales": {
+      "de": {
+        "name": "Veröffentlichung",
+        "slug": "veroeffentlichung",
+        "description": "Ankündigungen zu Veröffentlichungen und Projektfortschritt."
+      }
+    }
+  }
+]
