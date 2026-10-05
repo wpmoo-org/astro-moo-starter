@@ -6,6 +6,7 @@ import type { LanguageLink } from "@wpmoo/astro/i18n";
 import type { SeoMetadata } from "@wpmoo/astro/seo";
 
 export interface SiteChrome {
+  readonly locale: string;
   readonly brand: string;
   readonly homeHref: string;
   readonly navigation: readonly NonNullable<

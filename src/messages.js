@@ -1,5 +1,7 @@
 const messages = {
   en: {
+    language: "Language",
+    selectLanguage: "Select language",
     pages: "Pages",
     posts: "Blog",
     taxonomies: "Taxonomies",
@@ -12,6 +14,8 @@ const messages = {
     action: "Explore the native page",
   },
   de: {
+    language: "Sprache",
+    selectLanguage: "Sprache auswählen",
     pages: "Seiten",
     posts: "Beiträge",
     taxonomies: "Taxonomien",

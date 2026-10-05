@@ -39,6 +39,7 @@ export async function getChrome(
     active: active(getLocaleHref("/native-action", locale)),
   });
   return {
+    locale,
     brand: site.brand,
     homeHref: getLocaleHref("/", locale),
     languageLinks,

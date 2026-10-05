@@ -7,6 +7,7 @@ interface Props {
 }
 const data = getNotFoundOptions(Astro.props.locale);
 const chrome = {
+  locale: data.locale,
   brand: data.brand,
   homeHref: data.homeHref,
   languageLinks: data.languageLinks,

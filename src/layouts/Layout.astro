@@ -3,13 +3,15 @@ import Layout from "@wpmoo/astro/Layout.astro";
 import Header from "@wpmoo/astro/includes/Header.astro";
 import Footer from "@wpmoo/astro/includes/Footer.astro";
 import Sidebar from "@wpmoo/astro/includes/Sidebar.astro";
-import Button from "@wpmoo/astro/components/Button.astro";
+import LanguageSwitcher from "@wpmoo/astro/blocks/LanguageSwitcher.astro";
+import { getMessages } from "../messages.js";
 import type { SiteLayoutProps } from "../types.js";
 type Props = SiteLayoutProps;
 const { chrome, options, title, description, metadata, pageContext } =
   Astro.props;
 const { sidebar, ...layout } = options;
 const { defaultOpen, ...sidebarProps } = sidebar ?? {};
+const locale = chrome.locale;
 ---
 
 <Layout
@@ -41,13 +43,15 @@ const { defaultOpen, ...sidebarProps } = sidebar ?? {};
     breadcrumbs={[...chrome.breadcrumbs]}
     parts={options.parts}
   >
-    <Fragment slot="actions">
-      {
-        chrome.languageLinks.map(({ locale, href }) => (
-          <Button element="a" href={href} label={locale.toUpperCase()} />
-        ))
-      }
-    </Fragment>
+    <LanguageSwitcher
+      slot="actions"
+      links={chrome.languageLinks}
+      currentLocale={locale}
+      label={getMessages(locale).language}
+      menuLabel={getMessages(locale).selectLanguage}
+      languageNames={{ en: "English", de: "Deutsch" }}
+      class="ms-auto flex-shrink-0"
+    />
   </Header>
   <slot />
   <Footer
