@@ -1,5 +1,5 @@
 /** @type {import("@wpmoo/astro/config").PageOptionsInput} */
 export const projectDefaults = {
+  theme: "dark",
   sidebar: {},
-  parts: { content: { utilities: ["py-2"] } },
 };
