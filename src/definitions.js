@@ -65,9 +65,6 @@ export const taxonomies = [
   }),
 ];
 const bindings = taxonomies.map((taxonomy) => taxonomy.id);
-export const termFilePaths = Object.fromEntries(
-  taxonomies.map((taxonomy) => [taxonomy.id, fileURLToPath(taxonomy.source)]),
-);
 export const pagePlugin = page({
   source: new URL("./content/page/", import.meta.url),
   formats: ["md", "mdx"],
@@ -88,3 +85,16 @@ export const integration = {
     messages: { de: { title: "Diese Seite fehlt" } },
   },
 };
+
+export const sourceFilePaths = Object.fromEntries(
+  [
+    ...taxonomies
+      .filter((taxonomy) => taxonomy.sourceKind === "json")
+      .map((taxonomy) => taxonomy.source),
+    ...integration.plugins.flatMap((plugin) =>
+      plugin.contentTypes.flatMap((type) =>
+        type.source.kind === "json" ? [type.source.file] : [],
+      ),
+    ),
+  ].map((source) => [source, fileURLToPath(source)]),
+);

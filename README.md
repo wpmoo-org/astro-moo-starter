@@ -15,6 +15,8 @@ describes that workflow.
 
 ## Make It Yours
 
+- Follow the short [content guide](docs/content.md) and copy a draft from
+  [`templates/`](templates/) to add a page or post.
 - Edit pages and posts under `src/content/` and terms under `src/data/`.
 - Set the main language and category paths in `src/config.js`.
 - Configure the brand, post paths and taxonomy descriptors in `src/definitions.js`.
