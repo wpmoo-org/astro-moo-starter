@@ -81,6 +81,23 @@ export const integration = {
   site,
   plugins: [pagePlugin, postPlugin],
   taxonomies,
+  blocks: {
+    contentNote: { collection: "block", translationKey: "content-note" },
+  },
+  placements: [
+    {
+      id: "page-toc",
+      block: "toc",
+      at: "aside.content",
+      include: { views: ["single"], types: ["page", "post"] },
+    },
+    {
+      id: "content-note",
+      block: "contentNote",
+      at: "entry.after-content",
+      include: { translationKeys: ["placement-guide"] },
+    },
+  ],
   notFound: {
     messages: { de: { title: "Diese Seite fehlt" } },
   },

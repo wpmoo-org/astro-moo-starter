@@ -6,6 +6,7 @@ import { integration, sourceFilePaths } from "./definitions.js";
 import { jsonEntryId, sourceEntryId } from "@wpmoo/astro/content";
 import { pageSchema } from "@wpmoo/astro/plugins/page/content";
 import { postSchema } from "@wpmoo/astro/plugins/post/content";
+import { contentBlockSchema } from "@wpmoo/astro/placements/content";
 import { termSchema } from "@wpmoo/astro/taxonomies/content";
 
 // Add a schema here once when registering a new content collection.
@@ -92,8 +93,21 @@ type EntryCollections = {
 export const collections = Object.fromEntries([
   ...entries,
   ...terms,
-]) as EntryCollections &
-  Record<
-    Exclude<CollectionKey, keyof typeof schemas>,
+  [
+    "block",
+    defineCollection({
+      loader: glob({
+        base: new URL("./content/block/", import.meta.url),
+        pattern: "**/*.{md,mdx}",
+        generateId: sourceEntryId,
+        retainBody: true,
+      }),
+      schema: contentBlockSchema,
+    }),
+  ],
+]) as EntryCollections & {
+  block: CollectionConfig<typeof contentBlockSchema>;
+} & Record<
+    Exclude<CollectionKey, keyof typeof schemas | "block">,
     CollectionConfig<typeof termSchema>
   >;
