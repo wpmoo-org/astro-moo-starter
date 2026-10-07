@@ -83,8 +83,16 @@ export const integration = {
   taxonomies,
   blocks: {
     contentNote: { collection: "block", translationKey: "content-note" },
+    pageInformation: { collection: "block", translationKey: "page-information" },
   },
   placements: [
+    {
+      id: "page-information",
+      block: "pageInformation",
+      at: "aside.content",
+      order: 20,
+      include: { translationKeys: ["placement-guide"] },
+    },
     {
       id: "page-toc",
       block: "toc",
