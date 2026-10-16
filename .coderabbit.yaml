@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en
+tone_instructions: >-
+  Be direct and evidence-based. Preserve native Astro ownership, exact dependency contracts and the public
+  SDK/Starter boundary. The SDK is intentionally unpublished during this intake.
+
+reviews:
+  profile: assertive
+  request_changes_workflow: true
+  allow_author_approval: false
+  high_level_summary: false
+  review_status: false
+  review_progress: false
+  commit_status: true
+  fail_commit_status: true
+  in_progress_fortune: false
+  poem: false
+  changed_files_summary: false
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  assess_linked_issues: false
+  related_issues: false
+  related_prs: false
+  suggested_labels: false
+  suggested_reviewers: false
+
+  path_filters:
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/.astro/**"
+    - "!artifacts/**"
+
+  path_instructions:
+    - path: "src/**"
+      instructions: |
+        Starter owns authored content, native collections and site definitions.
+        Consume public SDK exports and SDK-owned routes/rendering. Do not add
+        copied presentation components, private deep imports or SDK source.
+        Preserve locale-specific slugs, translation keys and draft filtering.
+    - path: "tests/**"
+      instructions: |
+        Preserve native content/schema, locale and draft/publication behavior.
+        Tests use node:test and node:assert/strict with the installed SDK.
+    - path: ".github/workflows/**"
+      instructions: |
+        Keep starter-verify running on PRs into main, dev/main pushes and manual
+        dispatch. Preserve read-only permissions, immutable action/SDK commits
+        and the exact SDK archive SHA-256 gate before installation. The SDK is
+        unpublished; do not replace the verified archive with a registry guess.
+        Keep SDK source outside the Starter check/build root. Do not add
+        publication, deployment or privileged execution of PR code.
+    - path: "docs/**"
+      instructions: |
+        Keep public authoring recipes aligned with site definitions and the
+        installed SDK. Distinguish local, hosted and browser verification.
+
+  auto_review:
+    enabled: true
+    drafts: false
+    auto_incremental_review: true
+    auto_pause_after_reviewed_commits: 0
+    base_branches:
+      - main
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+
+  tools:
+    github-checks:
+      enabled: true
+    actionlint:
+      enabled: true
+    yamllint:
+      enabled: true
+    shellcheck:
+      enabled: true
+
+chat:
+  auto_reply: false

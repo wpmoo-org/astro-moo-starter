@@ -35,6 +35,20 @@ pages later using the public SDK SiteLayout.
 These project files belong to your site. Updating the SDK dependency preserves
 your content and settings; adopt starter-file revisions deliberately.
 
+## Verification
+
+Run `npm test`, `npm run check` and `npm run build` after installing the
+matching SDK. CI runs these checks on pull requests into `main`, pushes to
+`dev`/`main` and manual dispatches, using Node.js 22.23.2.
+
+Until the SDK is published, CI packs the SDK from immutable source commit
+`001a08a0aa594bec0d8ad1f01c15289e6259c6f1` and verifies archive SHA-256
+`82f4635066c814f47ef6b64e9fc6dbc112042b5a188606efad24ced9871b24b8`
+before installation. A source or archive mismatch fails verification. The
+portable manifest keeps its ordinary SDK version; no local path or generated
+lockfile is committed. SDK intake updates must deliberately refresh both
+the source commit and archive hash after validation.
+
 ## License
 
 MIT. Dependencies retain their own licenses:
