@@ -1,6 +1,6 @@
-// Site settings; the selected main locale has no public URL prefix.
+// Main locale has no public URL prefix. Every language keeps its own content directory.
+export const locales = ["en", "de"];
 export const mainLanguage = "en";
-if (!["en", "de"].includes(mainLanguage))
-  throw new TypeError("Invalid site main language");
+if (!locales.includes(mainLanguage))
+  throw new TypeError("Site main language must belong to configured locales");
 export const categoryPrefixes = { en: "/category", de: "/kategorie" };
-export const srcDir = new URL(`../routes/${mainLanguage}/`, import.meta.url);

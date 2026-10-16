@@ -1,0 +1,77 @@
+name: Starter CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - dev
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: starter-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: starter
+
+jobs:
+  starter-verify:
+    name: starter-verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      ASTRO_TELEMETRY_DISABLED: "1"
+
+    steps:
+      - name: Check out Starter
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: starter
+          persist-credentials: false
+
+      - name: Check out verified SDK source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: wpmoo-org/ui-astro
+          ref: 001a08a0aa594bec0d8ad1f01c15289e6259c6f1
+          path: sdk-source
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22.23.2"
+
+      - name: Pack and verify unpublished SDK
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/sdk-artifacts"
+          npm pack "$GITHUB_WORKSPACE/sdk-source/packages/astro" \
+            --ignore-scripts --pack-destination "$RUNNER_TEMP/sdk-artifacts"
+          printf '%s  %s\n' \
+            '82f4635066c814f47ef6b64e9fc6dbc112042b5a188606efad24ced9871b24b8' \
+            "$RUNNER_TEMP/sdk-artifacts/wpmoo-astro-0.1.0.tgz" | sha256sum --check
+
+      - name: Install with verified SDK archive
+        run: |
+          npm install --no-save --package-lock=false --ignore-scripts \
+            --no-audit --no-fund "$RUNNER_TEMP/sdk-artifacts/wpmoo-astro-0.1.0.tgz"
+
+      - name: Verify installed host dependencies
+        run: npm ls @wpmoo/astro @wpmoo/ui astro @astrojs/mdx typescript --depth=0
+
+      - name: Run authoring tests
+        run: npm test
+
+      - name: Check Astro and TypeScript
+        run: npm run check
+
+      - name: Build Starter
+        run: npm run build

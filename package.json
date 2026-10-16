@@ -14,14 +14,15 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test tests/*.test.mjs",
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview"
   },
   "dependencies": {
     "@wpmoo/astro": "0.1.0",
-    "astro": "7.3.3",
-    "@astrojs/mdx": "8.0.2"
+    "astro": "7.3.8",
+    "@astrojs/mdx": "8.0.3"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",

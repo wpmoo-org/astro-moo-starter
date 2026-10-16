@@ -2,7 +2,7 @@ import { defineSite } from "@wpmoo/astro/config";
 import { page } from "@wpmoo/astro/plugins/page";
 import { post } from "@wpmoo/astro/plugins/post";
 import { defineTaxonomy } from "@wpmoo/astro/taxonomies";
-import { mainLanguage, categoryPrefixes } from "./config.js";
+import { mainLanguage, locales, categoryPrefixes } from "./config.js";
 import { projectDefaults } from "./preferences.js";
 import { getMessages } from "./messages.js";
 import { fileURLToPath } from "node:url";
@@ -11,8 +11,17 @@ export const site = defineSite({
   brand: "Moo Starter",
   organization: { name: "Example Studio", names: { de: "Example Studio" } },
   defaults: { ...projectDefaults, lang: mainLanguage },
+  presentation: {
+    brandDescription: "Built with Moo UI",
+    navigation: "grouped",
+    assignedTaxonomies: true,
+    themeToggle: true,
+    languageSwitcher: { languageNames: { en: "English", de: "Deutsch" } },
+    locales: { de: { brandDescription: "Mit Moo UI erstellt" } },
+  },
+  links: { home: "/", nativeAction: "/native-action" },
   locales: Object.fromEntries(
-    ["en", "de"].map((locale) => {
+    locales.map((locale) => {
       const copy = getMessages(locale);
       return [
         locale,
@@ -56,30 +65,61 @@ export const taxonomies = [
   }),
 ];
 const bindings = taxonomies.map((taxonomy) => taxonomy.id);
-export const termFilePaths = Object.fromEntries(
-  taxonomies.map((taxonomy) => [taxonomy.id, fileURLToPath(taxonomy.source)]),
-);
 export const pagePlugin = page({
   source: new URL("./content/page/", import.meta.url),
   formats: ["md", "mdx"],
   taxonomies: bindings,
-  routes: { single: "host" },
 });
 export const postPlugin = post({
   label: "Blog",
   basePath: "/blog",
   source: new URL("./content/post/", import.meta.url),
   taxonomies: bindings,
-  routes: { single: "host", archive: "host" },
   locales: { de: { label: "Beiträge", basePath: "/beitraege" } },
 });
 export const integration = {
   site,
   plugins: [pagePlugin, postPlugin],
   taxonomies,
-  taxonomyRoutes: { archive: "host" },
+  blocks: {
+    contentNote: { collection: "block", translationKey: "content-note" },
+    pageInformation: { collection: "block", translationKey: "page-information" },
+  },
+  placements: [
+    {
+      id: "page-information",
+      block: "pageInformation",
+      at: "aside.content",
+      order: 20,
+      include: { translationKeys: ["placement-guide"] },
+    },
+    {
+      id: "page-toc",
+      block: "toc",
+      at: "aside.content",
+      include: { views: ["single"], types: ["page", "post"] },
+    },
+    {
+      id: "content-note",
+      block: "contentNote",
+      at: "entry.after-content",
+      include: { translationKeys: ["placement-guide"] },
+    },
+  ],
   notFound: {
-    routeOwner: "host",
     messages: { de: { title: "Diese Seite fehlt" } },
   },
 };
+
+export const sourceFilePaths = Object.fromEntries(
+  [
+    ...taxonomies
+      .filter((taxonomy) => taxonomy.sourceKind === "json")
+      .map((taxonomy) => taxonomy.source),
+    ...integration.plugins.flatMap((plugin) =>
+      plugin.contentTypes.flatMap((type) =>
+        type.source.kind === "json" ? [type.source.file] : [],
+      ),
+    ),
+  ].map((source) => [source, fileURLToPath(source)]),
+);

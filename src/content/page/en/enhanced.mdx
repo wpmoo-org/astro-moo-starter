@@ -11,8 +11,12 @@ taxonomies:
   sector: [development]
 ---
 
-import Action from "../../../components/Action.astro";
+import Button from "@wpmoo/astro/components/Button.astro";
 
 This authored content belongs to the project and survives theme updates.
 
-<Action label="Explore the native page" href={props.links.nativeAction} />
+<Button
+  element="a"
+  label="Explore the native page"
+  href={props.links.nativeAction}
+/>

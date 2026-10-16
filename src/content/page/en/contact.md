@@ -7,5 +7,4 @@ locale: en
 translationKey: contact
 taxonomies: {}
 ---
-
 This authored content belongs to the project and survives theme updates.
