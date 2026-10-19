@@ -61,7 +61,7 @@ const entries = integration.plugins.flatMap((plugin) =>
       collection,
       defineCollection({
         loader,
-        schema: withTaxonomies(
+        schema: withTaxonomies<(typeof schemas)[keyof typeof schemas]["shape"]>(
           schemas[collection as keyof typeof schemas],
           taxonomies,
         ),
