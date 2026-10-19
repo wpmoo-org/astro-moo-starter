@@ -23,6 +23,13 @@ describes that workflow.
 - Adjust page preferences in `src/preferences.js` and site copy in `src/messages.js`.
 - Configure the default appearance and header controls through `site.presentation`.
 
+Content headings use title → description → breadcrumb → metadata/actions.
+Set `projectDefaults.parts.pageHeader.alignment` in `src/preferences.js` to
+`start` (default), `center` or `end`; type/view and entry options can override
+the same preference. Breadcrumb translations belong to `parts.pageHeader`,
+not the application Header. Logical RTL text alignment remains a known SDK
+limitation and is not certified by the current visual candidate.
+
 Translation keys connect entries; each language keeps its own slug. The main
 language has no URL prefix. Content can belong to several terms, and each
 taxonomy has its own sidebar submenu and linked archives.
@@ -42,8 +49,8 @@ matching SDK. CI runs these checks on pull requests into `main`, pushes to
 `dev`/`main` and manual dispatches, using Node.js 22.23.2.
 
 Until the SDK is published, CI packs the SDK from immutable source commit
-`001a08a0aa594bec0d8ad1f01c15289e6259c6f1` and verifies archive SHA-256
-`82f4635066c814f47ef6b64e9fc6dbc112042b5a188606efad24ced9871b24b8`
+`7808516c8e46d17d6625ac946ecb873437560ab9` and verifies archive SHA-256
+`285c44a2b7f387b19a0b58e2d6a9a581eb826e638cfc2fa40dad479533b3be9e`
 before installation. A source or archive mismatch fails verification. The
 portable manifest keeps its ordinary SDK version; no local path or generated
 lockfile is committed. SDK intake updates must deliberately refresh both

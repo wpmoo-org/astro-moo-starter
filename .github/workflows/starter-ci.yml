@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: wpmoo-org/ui-astro
-          ref: 001a08a0aa594bec0d8ad1f01c15289e6259c6f1
+          ref: 7808516c8e46d17d6625ac946ecb873437560ab9
           path: sdk-source
           persist-credentials: false
 
@@ -56,7 +56,7 @@ jobs:
           npm pack "$GITHUB_WORKSPACE/sdk-source/packages/astro" \
             --ignore-scripts --pack-destination "$RUNNER_TEMP/sdk-artifacts"
           printf '%s  %s\n' \
-            '82f4635066c814f47ef6b64e9fc6dbc112042b5a188606efad24ced9871b24b8' \
+            '285c44a2b7f387b19a0b58e2d6a9a581eb826e638cfc2fa40dad479533b3be9e' \
             "$RUNNER_TEMP/sdk-artifacts/wpmoo-astro-0.1.0.tgz" | sha256sum --check
 
       - name: Install with verified SDK archive

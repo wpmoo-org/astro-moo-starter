@@ -31,9 +31,9 @@ export const site = defineSite({
             header: {
               toggleLabel: copy.toggle,
               navigationLabel: copy.navigation,
-              breadcrumbLabel: copy.breadcrumb,
               skipLabel: copy.skip,
             },
+            pageHeader: { breadcrumbLabel: copy.breadcrumb },
             loop: { emptyText: copy.empty, dateStyle: "long" },
           },
         },
